@@ -1,12 +1,12 @@
 [gd_scene load_steps=3 format=3 uid="uid://dj18by2e3luba"]
 
-[ext_resource type="Script" path="res://Scripts/Interceptor.gd" id="1_tt0kt"]
+[ext_resource type="Script" path="res://actors/interceptor.gd" id="1_bcv4q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bo1hx"]
 size = Vector2(46, 37)
 
 [node name="Interceptor" type="Node2D"]
-script = ExtResource("1_tt0kt")
+script = ExtResource("1_bcv4q")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 position = Vector2(-48.2573, -29.118)

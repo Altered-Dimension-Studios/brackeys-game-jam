@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://cfco3khamdo54"]
 
-[ext_resource type="Script" path="res://Scripts/game_scene.gd" id="1_0j0ay"]
-[ext_resource type="PackedScene" uid="uid://c0togfy3dhdww" path="res://Scenes/Map.tscn" id="2_audaf"]
+[ext_resource type="Script" path="res://scenes/game_scene.gd" id="1_u460d"]
+[ext_resource type="PackedScene" uid="uid://tk4hqkk33v8a" path="res://actors/map.tscn" id="2_754wd"]
 
 [sub_resource type="Gradient" id="Gradient_rdorf"]
 offsets = PackedFloat32Array(0.534517, 0.56213)
@@ -18,7 +18,7 @@ fill_from = Vector2(0.5, 0.5)
 font_size = 21
 
 [node name="MainScene" type="Node2D"]
-script = ExtResource("1_0j0ay")
+script = ExtResource("1_u460d")
 
 [node name="Background" type="ColorRect" parent="."]
 custom_minimum_size = Vector2(1920, 1080)
@@ -26,7 +26,7 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0.12549, 0.141176, 0.176471, 1)
 
-[node name="Map" parent="." instance=ExtResource("2_audaf")]
+[node name="Map" parent="." instance=ExtResource("2_754wd")]
 
 [node name="Scanner" type="Node2D" parent="."]
 

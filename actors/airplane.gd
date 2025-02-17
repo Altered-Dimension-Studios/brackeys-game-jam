@@ -2,7 +2,7 @@ extends Node2D
 
 class_name Airplane
 
-@export var air_speed = 5000 #km/h
+@export var air_speed = 50000 #km/h
 @export var screen_speed = 0
 @export var start_distance = 100000 #km
 @export var distance = 0

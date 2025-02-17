@@ -11,14 +11,14 @@ config_version=5
 [application]
 
 config/name="godottest"
-run/main_scene="res://Scenes/GameScene.tscn"
+run/main_scene="res://managers/game_manager.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 PlanesDatabase="*res://utils/planes_db.gd"
-SignalBus="*res://Scripts/signal_bus.gd"
+SignalBus="*res://utils/signal_bus.gd"
 
 [display]
 

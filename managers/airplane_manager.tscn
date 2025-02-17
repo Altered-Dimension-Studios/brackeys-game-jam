@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://ch18s66ib7py4"]
+
+[node name="AirplaneManager" type="Node2D"]

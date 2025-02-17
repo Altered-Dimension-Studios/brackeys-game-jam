@@ -1,8 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://3xievwhakyrx"]
 
-[ext_resource type="Script" path="res://Scripts/globals.gd" id="1_ogqn2"]
-
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_a5l16"]
+
+[sub_resource type="GDScript" id="GDScript_23y1x"]
+script/source = "extends Node2D
+"
 
 [node name="Markers" type="Node"]
 
@@ -13,7 +15,7 @@ position = Vector2(1853, 77)
 [node name="MapEnd" type="Node2D" parent="."]
 material = SubResource("CanvasItemMaterial_a5l16")
 position = Vector2(76, 80)
-script = ExtResource("1_ogqn2")
+script = SubResource("GDScript_23y1x")
 
 [node name="MapInterceptorStart" type="Node2D" parent="."]
 material = SubResource("CanvasItemMaterial_a5l16")

@@ -18,6 +18,6 @@ func _on_blue_area_2d_area_exited(area: Area2D) -> void:
 	print("Plane exited interception area")
 
 
-func _on_red_area_2d_area_entered(area: Area2D) -> void:
-	SignalBus.plane_entered_red_zone.emit()
-	print("Plane entered red zone")
+func _on_dead_area_2d_area_entered(area: Area2D) -> void:
+	SignalBus.plane_entered_dead_zone.emit()
+	print("Plane entered dead zone")
