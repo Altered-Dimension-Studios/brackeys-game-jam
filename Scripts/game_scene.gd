@@ -14,16 +14,9 @@ var EVIL_DISTANCE_HARD_CODED = 84000
 	
 func _ready() -> void:
 	airplane = airplane_scene.instantiate() as Airplane
-	interceptor = interceptor_scene.instantiate() as Interceptor
-	
-	airplane.constructor([plane_start, plane_end])
-	interceptor.constructor([plane_start, plane_end], EVIL_DISTANCE_HARD_CODED)
-	
+	airplane.constructor([plane_start, plane_end])	
 	airplane.plane_clicked.connect(_plane_selected.bind(airplane))
-	interceptor.plane_clicked.connect(_plane_selected.bind(interceptor))
-	
 	add_child(airplane)
-	add_child(interceptor)
 
 	airplane.move_to_marker(plane_start)
 
@@ -33,23 +26,23 @@ func _plane_selected(plane: Airplane) -> void:
 
 
 func _on_button_intercept_pressed() -> void:
-	print($ButtonIntercept/CooldownTimer.is_stopped())
-	if !interceptor.visible and $ButtonIntercept/CooldownTimer.is_stopped():
-		interceptor.visible = true
-		interceptor.move_to_marker(interceptor_start)
-		interceptor.distance = EVIL_DISTANCE_HARD_CODED
-	
+	interceptor = interceptor_scene.instantiate() as Interceptor
+	interceptor.constructor([plane_start, plane_end], EVIL_DISTANCE_HARD_CODED)
+	interceptor.plane_clicked.connect(_plane_selected.bind(interceptor))
+	add_child(interceptor)
+	interceptor.move_to_marker(interceptor_start)
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	if airplane != null && airplane.position.x <= plane_end.position.x:
-		remove_child(airplane)
-		selected_plane = null
-		airplane.free()
-	if interceptor != null && interceptor.position.x < interceptor_end.position.x:
-			$ButtonIntercept/CooldownTimer.start()
-			interceptor.visible = false
-			selected_plane = null
-	
-	if selected_plane:
-		$Layout/FlightDetailsPanel/SpeedValue.text = str(selected_plane.air_speed)
-	
+#func _process(delta: float) -> void:
+	#if airplane != null && airplane.position.x <= plane_end.position.x:
+		#remove_child(airplane)
+		#selected_plane = null
+		#airplane.free()
+	#if interceptor != null && interceptor.position.x < interceptor_end.position.x:
+			#$ButtonIntercept/CooldownTimer.start()
+			#interceptor.visible = false
+			#selected_plane = null
+	#
+	#if selected_plane:
+		#$Layout/FlightDetailsPanel/SpeedValue.text = str(selected_plane.air_speed)

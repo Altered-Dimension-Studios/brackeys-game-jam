@@ -1,0 +1,6 @@
+extends Node
+
+
+signal plane_entered_interception
+signal plane_exited_interception
+signal plane_entered_red_zone
