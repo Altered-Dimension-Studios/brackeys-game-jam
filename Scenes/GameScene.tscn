@@ -1,12 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://cfco3khamdo54"]
+[gd_scene load_steps=7 format=3 uid="uid://cfco3khamdo54"]
 
 [ext_resource type="Script" path="res://Scripts/game_scene.gd" id="1_0j0ay"]
-[ext_resource type="PackedScene" uid="uid://dpv2td7wftexi" path="res://Scenes/Airplane.tscn" id="1_ruok5"]
-[ext_resource type="Script" path="res://Scripts/globals.gd" id="3_vi5ju"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_efpxn"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_a5l16"]
+[ext_resource type="PackedScene" uid="uid://c0togfy3dhdww" path="res://Scenes/Map.tscn" id="2_audaf"]
 
 [sub_resource type="Gradient" id="Gradient_rdorf"]
 offsets = PackedFloat32Array(0.534517, 0.56213)
@@ -16,6 +11,8 @@ colors = PackedColorArray(0.438277, 0.438277, 0.438277, 1, 0.12549, 0.141176, 0.
 gradient = SubResource("Gradient_rdorf")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_efpxn"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_84ufs"]
 font_size = 21
@@ -28,61 +25,8 @@ custom_minimum_size = Vector2(1920, 1080)
 offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0.12549, 0.141176, 0.176471, 1)
-metadata/_edit_use_anchors_ = true
 
-[node name="Map" type="Node2D" parent="."]
-
-[node name="Background" type="ColorRect" parent="Map"]
-offset_left = 35.0
-offset_top = 30.0
-offset_right = 1888.0
-offset_bottom = 125.0
-color = Color(0, 0, 0, 1)
-
-[node name="Blue zone" type="ColorRect" parent="Map"]
-material = SubResource("CanvasItemMaterial_efpxn")
-offset_left = 496.0
-offset_top = 40.0
-offset_right = 1551.0
-offset_bottom = 117.0
-color = Color(0, 0.274239, 0.537999, 1)
-
-[node name="Red zone" type="ColorRect" parent="Map"]
-material = SubResource("CanvasItemMaterial_efpxn")
-offset_left = 50.0
-offset_top = 41.0
-offset_right = 271.0
-offset_bottom = 118.0
-color = Color(0.541176, 0, 0, 1)
-
-[node name="Divider" type="ColorRect" parent="Map"]
-offset_left = 35.0
-offset_top = 76.0
-offset_right = 1888.0
-offset_bottom = 79.0
-color = Color(0.907308, 0.486548, 9.62615e-07, 1)
-
-[node name="Plane" parent="Map" instance=ExtResource("1_ruok5")]
-position = Vector2(1911, -34)
-
-[node name="Markers" type="Node" parent="Map"]
-
-[node name="MapStart" type="Node2D" parent="Map/Markers"]
-material = SubResource("CanvasItemMaterial_a5l16")
-position = Vector2(1853, 77)
-
-[node name="MapEnd" type="Node2D" parent="Map/Markers"]
-material = SubResource("CanvasItemMaterial_a5l16")
-position = Vector2(76, 80)
-script = ExtResource("3_vi5ju")
-
-[node name="MapInterceptorStart" type="Node2D" parent="Map/Markers"]
-material = SubResource("CanvasItemMaterial_a5l16")
-position = Vector2(1537, 79)
-
-[node name="MapInterceptorEnd" type="Node2D" parent="Map/Markers"]
-material = SubResource("CanvasItemMaterial_a5l16")
-position = Vector2(530, 81)
+[node name="Map" parent="." instance=ExtResource("2_audaf")]
 
 [node name="Scanner" type="Node2D" parent="."]
 
@@ -159,5 +103,9 @@ offset_top = 823.0
 offset_right = 848.0
 offset_bottom = 893.0
 text = "INTERCEPT"
+
+[node name="CooldownTimer" type="Timer" parent="ButtonIntercept"]
+wait_time = 5.0
+one_shot = true
 
 [connection signal="pressed" from="ButtonIntercept" to="." method="_on_button_intercept_pressed"]

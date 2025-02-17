@@ -15,7 +15,17 @@ run/main_scene="res://Scenes/GameScene.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+SignalBus="*res://Scripts/signal_bus.gd"
+
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+
+[layer_names]
+
+2d_physics/layer_1="Interception Layer"
+2d_physics/layer_2="Red Zone Layer"
+2d_physics/layer_3="Plane Layer"
