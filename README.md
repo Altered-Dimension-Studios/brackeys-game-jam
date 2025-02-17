@@ -15,6 +15,9 @@ The project is made using [Godot v4.3](https://godotengine.org/download/archive/
   - types - Contains custom types which can be used on nodes instead of traditional (more generic) existing ones;
   - utils - Contains utilitary functions and constants;
 
+### Database
+Godot editor cannot read contents of json files. To check/edit json files use Visual Studio Code.
+
 ### How to use signal_bus
 
 - Add a signal to signal_bus.gd
