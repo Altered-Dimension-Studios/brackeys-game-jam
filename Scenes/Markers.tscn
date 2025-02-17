@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://3xievwhakyrx"]
+
+[ext_resource type="Script" path="res://Scripts/globals.gd" id="1_ogqn2"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_a5l16"]
+
+[node name="Markers" type="Node"]
+
+[node name="MapStart" type="Node2D" parent="."]
+material = SubResource("CanvasItemMaterial_a5l16")
+position = Vector2(1853, 77)
+
+[node name="MapEnd" type="Node2D" parent="."]
+material = SubResource("CanvasItemMaterial_a5l16")
+position = Vector2(76, 80)
+script = ExtResource("1_ogqn2")
+
+[node name="MapInterceptorStart" type="Node2D" parent="."]
+material = SubResource("CanvasItemMaterial_a5l16")
+position = Vector2(1537, 79)
+
+[node name="MapInterceptorEnd" type="Node2D" parent="."]
+material = SubResource("CanvasItemMaterial_a5l16")
+position = Vector2(530, 81)
+
+[node name="Area2D" type="Area2D" parent="MapInterceptorEnd"]
