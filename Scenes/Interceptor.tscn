@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://dj18by2e3luba"]
+
+[ext_resource type="Script" path="res://Scripts/Interceptor.gd" id="1_tt0kt"]
+
+[node name="Interceptor" type="Node2D"]
+script = ExtResource("1_tt0kt")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(-48.2573, -29.118)
+scale = Vector2(5.75244, 4.50915)
+color = Color(2.69532e-06, 0.637296, 0.965951, 1)
+polygon = PackedVector2Array(3, 7, 11, 3, 11, 11)
+
+[node name="Button" type="Button" parent="."]
+offset_left = -30.0
+offset_top = -17.0
+offset_right = 15.0
+offset_bottom = 21.0
+flat = true
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
