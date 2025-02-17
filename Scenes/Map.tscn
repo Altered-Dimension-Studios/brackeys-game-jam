@@ -1,0 +1,90 @@
+[gd_scene load_steps=9 format=3 uid="uid://c0togfy3dhdww"]
+
+[ext_resource type="PackedScene" uid="uid://dpv2td7wftexi" path="res://Scenes/Airplane.tscn" id="1_d5cbb"]
+[ext_resource type="Texture2D" uid="uid://b28e6uutdfs8e" path="res://icon.svg" id="1_gw3s3"]
+[ext_resource type="Script" path="res://Scripts/map.gd" id="1_p43fr"]
+[ext_resource type="Script" path="res://Scripts/globals.gd" id="2_b17ai"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_efpxn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nofpy"]
+size = Vector2(128.123, 122.182)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nbfal"]
+size = Vector2(116.87, 118.667)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_a5l16"]
+
+[node name="Map" type="Node2D"]
+script = ExtResource("1_p43fr")
+
+[node name="Background" type="ColorRect" parent="."]
+offset_left = 35.0
+offset_top = 30.0
+offset_right = 1888.0
+offset_bottom = 125.0
+color = Color(0, 0, 0, 1)
+
+[node name="Blue zone" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_efpxn")
+position = Vector2(1029.5, 77)
+scale = Vector2(8.10156, 0.859375)
+texture = ExtResource("1_gw3s3")
+
+[node name="BlueArea2D" type="Area2D" parent="Blue zone"]
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Blue zone/BlueArea2D"]
+position = Vector2(-0.432014, -0.581818)
+shape = SubResource("RectangleShape2D_nofpy")
+
+[node name="Red zone" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+material = SubResource("CanvasItemMaterial_efpxn")
+position = Vector2(92, 78)
+scale = Vector2(0.859375, 0.75)
+texture = ExtResource("1_gw3s3")
+
+[node name="RedArea2D" type="Area2D" parent="Red zone"]
+collision_layer = 2
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Red zone/RedArea2D"]
+position = Vector2(-2.78258, 2)
+shape = SubResource("RectangleShape2D_nbfal")
+
+[node name="Divider" type="ColorRect" parent="."]
+offset_left = 35.0
+offset_top = 76.0
+offset_right = 1888.0
+offset_bottom = 79.0
+color = Color(0.907308, 0.486548, 9.62615e-07, 1)
+
+[node name="Plane" parent="." instance=ExtResource("1_d5cbb")]
+position = Vector2(1911, -34)
+air_speed = 13860
+
+[node name="Markers" type="Node" parent="."]
+
+[node name="MapStart" type="Node2D" parent="Markers"]
+material = SubResource("CanvasItemMaterial_a5l16")
+position = Vector2(1853, 77)
+
+[node name="MapEnd" type="Node2D" parent="Markers"]
+material = SubResource("CanvasItemMaterial_a5l16")
+position = Vector2(76, 80)
+script = ExtResource("2_b17ai")
+
+[node name="MapInterceptorStart" type="Node2D" parent="Markers"]
+material = SubResource("CanvasItemMaterial_a5l16")
+position = Vector2(1537, 79)
+
+[node name="MapInterceptorEnd" type="Node2D" parent="Markers"]
+material = SubResource("CanvasItemMaterial_a5l16")
+position = Vector2(530, 81)
+
+[connection signal="area_entered" from="Blue zone/BlueArea2D" to="." method="_on_blue_area_2d_area_entered"]
+[connection signal="area_exited" from="Blue zone/BlueArea2D" to="." method="_on_blue_area_2d_area_exited"]
+[connection signal="area_entered" from="Red zone/RedArea2D" to="." method="_on_red_area_2d_area_entered"]

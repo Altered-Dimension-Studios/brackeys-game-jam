@@ -18,8 +18,15 @@ config/icon="res://icon.svg"
 [autoload]
 
 PlanesDatabase="*res://utils/planes_db.gd"
+SignalBus="*res://Scripts/signal_bus.gd"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+
+[layer_names]
+
+2d_physics/layer_1="Interception Layer"
+2d_physics/layer_2="Red Zone Layer"
+2d_physics/layer_3="Plane Layer"

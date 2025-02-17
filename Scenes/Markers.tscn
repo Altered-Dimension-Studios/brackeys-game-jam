@@ -22,5 +22,3 @@ position = Vector2(1537, 79)
 [node name="MapInterceptorEnd" type="Node2D" parent="."]
 material = SubResource("CanvasItemMaterial_a5l16")
 position = Vector2(530, 81)
-
-[node name="Area2D" type="Area2D" parent="MapInterceptorEnd"]
