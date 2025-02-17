@@ -4,15 +4,16 @@ extends Node2D
 @onready var plane_end: Node2D = $Map/Markers/MapEnd
 @onready var interceptor_start: Node2D = $Map/Markers/MapInterceptorStart
 @onready var interceptor_end: Node2D = $Map/Markers/MapInterceptorEnd
-
+var airplane_scene = preload("res://Scenes/Airplane.tscn")
+var interceptor_scene = preload("res://Scenes/Interceptor.tscn")
 var airplane: Airplane
 var interceptor: Interceptor
 
 var selected_plane: Airplane
 	
 func _ready() -> void:
-	airplane = preload("res://Scenes/Airplane.tscn").instantiate() as Airplane
-	interceptor = preload("res://Scenes/Interceptor.tscn").instantiate() as Interceptor
+	airplane = airplane_scene.instantiate() as Airplane
+	interceptor = interceptor_scene.instantiate() as Interceptor
 	
 	airplane.constructor([plane_start, plane_end])
 	interceptor.constructor([plane_start, plane_end], 90000)
@@ -27,15 +28,15 @@ func _ready() -> void:
 	interceptor.move_to_marker(interceptor_start)
 
 func _process(delta: float) -> void:
-
-
-	airplane.update_screen_position()
-	interceptor.update_screen_position()
-	
-	if airplane.position.x < plane_end.position.x:
-		remove_child(airplane)		
-	if interceptor.position.x < interceptor_end.position.x:
-		remove_child(interceptor)	
+	if airplane != null && airplane.position.x <= plane_end.position.x:
+		remove_child(airplane)
+		selected_plane = null
+		airplane.free()
+	if interceptor != null && \
+		interceptor.position.x < interceptor_end.position.x:
+		remove_child(interceptor)
+		selected_plane = null
+		interceptor = null	
 	
 	if selected_plane:
 		$Layout/FlightDetailsPanel/SpeedValue.text = str(selected_plane.air_speed)

@@ -29,6 +29,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	var km_per_second = air_speed / 3600.0
 	distance = max((distance - air_speed * delta), 0)
+	update_screen_position()
 
 func move_to_marker(marker: Node2D) -> void:
 	position = marker.position + position_offset
