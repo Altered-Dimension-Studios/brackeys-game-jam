@@ -44,6 +44,7 @@ func _process(delta: float) -> void:
 
 func _plane_selected(plane: Airplane) -> void:
 	selected_plane = plane
+	PlanesDatabase.get_random_plane()
 
 func _on_button_intercept_pressed() -> void:
 	pass 

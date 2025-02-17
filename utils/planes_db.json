@@ -1,0 +1,44 @@
+{
+	"0": {
+		"name": "Boeing 747-8",
+		"length": 76.3,
+		"wingspan": 68.4,
+		"speed": 0.855,
+		"fuel": 7730
+	},
+	"1": {
+		"name": "Airbus A380",
+		"length": 72.7,
+		"wingspan": 79.8,
+		"speed": 0.85,
+		"fuel": 8000
+	},
+	"2": {
+		"name": "Boeing 777-300ER",
+		"length": 73.9,
+		"wingspan": 64.8,
+		"speed": 0.84,
+		"fuel": 7370
+	},
+	"3": {
+		"name": "Airbus A350-1000",
+		"length": 73.79,
+		"wingspan": 64.75,
+		"speed": 0.85,
+		"fuel": 8700
+	},
+	"4": {
+		"name": "Boeing 737 MAX 8",
+		"length": 39.5,
+		"wingspan": 35.9,
+		"speed": 0.79,
+		"fuel": 3550
+	},
+	"5": {
+		"name": "Airbus A320neo",
+		"length": 37.57,
+		"wingspan": 35.8,
+		"speed": 0.78,
+		"fuel": 3500
+	}
+}
