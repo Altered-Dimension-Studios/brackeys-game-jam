@@ -10,13 +10,14 @@ var airplane: Airplane
 var interceptor: Interceptor
 
 var selected_plane: Airplane
+var EVIL_DISTANCE_HARD_CODED = 84000
 	
 func _ready() -> void:
 	airplane = airplane_scene.instantiate() as Airplane
 	interceptor = interceptor_scene.instantiate() as Interceptor
 	
 	airplane.constructor([plane_start, plane_end])
-	interceptor.constructor([plane_start, plane_end], 90000)
+	interceptor.constructor([plane_start, plane_end], EVIL_DISTANCE_HARD_CODED)
 	
 	airplane.plane_clicked.connect(_plane_selected.bind(airplane))
 	interceptor.plane_clicked.connect(_plane_selected.bind(interceptor))
@@ -25,26 +26,30 @@ func _ready() -> void:
 	add_child(interceptor)
 
 	airplane.move_to_marker(plane_start)
-	interceptor.move_to_marker(interceptor_start)
 
+
+func _plane_selected(plane: Airplane) -> void:
+	selected_plane = plane
+
+
+func _on_button_intercept_pressed() -> void:
+	print($ButtonIntercept/CooldownTimer.is_stopped())
+	if !interceptor.visible and $ButtonIntercept/CooldownTimer.is_stopped():
+		interceptor.visible = true
+		interceptor.move_to_marker(interceptor_start)
+		interceptor.distance = EVIL_DISTANCE_HARD_CODED
+	
+# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if airplane != null && airplane.position.x <= plane_end.position.x:
 		remove_child(airplane)
 		selected_plane = null
 		airplane.free()
-	if interceptor != null && \
-		interceptor.position.x < interceptor_end.position.x:
-		remove_child(interceptor)
-		selected_plane = null
-		interceptor = null	
+	if interceptor != null && interceptor.position.x < interceptor_end.position.x:
+			$ButtonIntercept/CooldownTimer.start()
+			interceptor.visible = false
+			selected_plane = null
 	
 	if selected_plane:
 		$Layout/FlightDetailsPanel/SpeedValue.text = str(selected_plane.air_speed)
-	
-
-func _plane_selected(plane: Airplane) -> void:
-	selected_plane = plane
-
-func _on_button_intercept_pressed() -> void:
-	pass 
 	

@@ -36,7 +36,8 @@ func move_to_marker(marker: Node2D) -> void:
 	
 func update_screen_position() -> void:
 	if screen_start && screen_end:
-		var mapped_pos = remap(distance, start_distance, 0, screen_start, screen_end)
+		var mapped_pos = remap(distance, start_distance, 0, screen_start, 
+			screen_end)
 		position = Vector2(mapped_pos, position.y)
 
 func move_to(pos: Vector2) -> void:
