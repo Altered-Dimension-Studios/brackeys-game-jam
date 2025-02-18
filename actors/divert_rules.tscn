@@ -1,3 +1,66 @@
-[gd_scene format=3 uid="uid://cn36mmy2hhaop"]
+[gd_scene load_steps=4 format=3 uid="uid://cn36mmy2hhaop"]
 
-[node name="DivertRules" type="Node2D"]
+[ext_resource type="Script" path="res://actors/divert_rules.gd" id="1_qrdpf"]
+
+[sub_resource type="Gradient" id="Gradient_fyw0n"]
+offsets = PackedFloat32Array(0.98893, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ermyr"]
+gradient = SubResource("Gradient_fyw0n")
+width = 200
+height = 300
+
+[node name="DivertRules" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_qrdpf")
+
+[node name="Cover" type="TextureButton" parent="."]
+layout_mode = 0
+offset_right = 127.0
+offset_bottom = 176.0
+texture_normal = SubResource("GradientTexture2D_ermyr")
+
+[node name="Label" type="Label" parent="Cover"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -54.0
+offset_top = -11.5
+offset_right = 54.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "DIVERT RULES"
+
+[node name="DestinationsPage" type="Panel" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 199.0
+offset_bottom = 301.0
+
+[node name="Label" type="Label" parent="DestinationsPage"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -50.0
+offset_right = 50.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "List of flights"
+
+[node name="ItemList" type="FlowContainer" parent="DestinationsPage"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+vertical = true
+
+[connection signal="button_up" from="Cover" to="." method="_on_cover_button_up"]
