@@ -32,7 +32,6 @@ func handle_air_speed() -> void:
 			air_speed = intercept_target.air_speed
 			rotation_degrees = intercept_target.rotation_degrees
 			SignalBus.plane_intercepted.emit(intercept_target)
-			print("ok")
 	else: 
 		air_speed = cruise_air_speed
 

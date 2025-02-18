@@ -54,6 +54,7 @@ func _on_plane_removed(plane: Airplane) -> void:
 	
 	if plane is Interceptor:
 		num_interceptors -= 1
+		interceptor.intercept_target = null
 	else:
 		num_airplanes -= 1
 
@@ -99,11 +100,12 @@ func _intercept() -> bool:
 	return false
 
 func _destroy_intercepted_plane() -> bool:
-	if selected_plane && \
-		interceptor.intercept_target == selected_plane && \
-		abs(interceptor.intercept_target.distance - interceptor.distance) < 10:
-			SignalBus.plane_removed.emit(interceptor.intercept_target)
-			interceptor.intercept_target.free()
-			print("Destroyed plane")
-			return true
+	if selected_plane != null && interceptor != null && \
+	interceptor.intercept_target != null && \
+	interceptor.intercept_target == selected_plane && \
+	abs(interceptor.intercept_target.distance - interceptor.distance) < 10:
+		SignalBus.plane_removed.emit(interceptor.intercept_target)
+		interceptor.intercept_target.free()
+		interceptor.intercept_target = null
+		return true
 	return false

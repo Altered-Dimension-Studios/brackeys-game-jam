@@ -12,11 +12,12 @@ func _on_blue_area_2d_area_exited(area: Area2D) -> void:
 	var plane: Airplane = area.get_parent()
 	plane.set_in_interception_area(false)
 	
+	SignalBus.plane_exited_interception.emit(plane)
+
 	if plane is Interceptor:
 		SignalBus.plane_removed.emit(plane)
 		plane.free()
 		
-	SignalBus.plane_exited_interception.emit(plane)
 	#print("Plane exited interception area")
 
 
