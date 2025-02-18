@@ -30,6 +30,7 @@ func constructor(_plane_start, _plane_end, _interceptor_start, _interceptor_end)
 
 func _init() -> void:
 	SignalBus.plane_removed.connect(_on_plane_removed.bind())
+	SignalBus.plane_clicked.connect(_plane_selected.bind())
 	
 func _ready() -> void:
 	emit_signal("ready_instance")
@@ -38,6 +39,10 @@ func _test_spawn():
 	_spawn_airplane()
 	await get_tree().create_timer(4).timeout
 	_spawn_airplane()
+	await get_tree().create_timer(20).timeout
+	_spawn_airplane()
+
+
 
 	
 func _plane_selected(plane: Airplane) -> void:
@@ -91,4 +96,14 @@ func _intercept() -> bool:
 		interceptor.intercept_target = selected_plane
 		can_intercept = false
 		return true
+	return false
+
+func _destroy_intercepted_plane() -> bool:
+	if selected_plane && \
+		interceptor.intercept_target == selected_plane && \
+		abs(interceptor.intercept_target.distance - interceptor.distance) < 10:
+			SignalBus.plane_removed.emit(interceptor.intercept_target)
+			interceptor.intercept_target.free()
+			print("Destroyed plane")
+			return true
 	return false

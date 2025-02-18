@@ -47,7 +47,7 @@ func update_screen_position() -> void:
 		position = Vector2(mapped_pos, position.y)
 
 func _on_button_pressed() -> void:
-	emit_signal("plane_clicked")
+	SignalBus.plane_clicked.emit(self)
 
 func set_in_interception_area(interception: bool) -> void:
 	print("Setting in interception area to " + str(interception))

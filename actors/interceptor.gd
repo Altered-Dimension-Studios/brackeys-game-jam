@@ -17,13 +17,22 @@ func _process(delta: float) -> void:
 	handle_air_speed()
 	
 func handle_air_speed() -> void:
-	if intercept_target && intercept_target is not Interceptor:
-		if intercept_target.distance < self.distance:
-			air_speed = max_air_speed
-		elif intercept_target.distance > self.distance:
-			air_speed = -max_air_speed
+	if intercept_target != null && intercept_target is not Interceptor:
+		var distance_diff = abs(intercept_target.distance - distance)
+		
+		if distance_diff > 10:
+			if intercept_target.distance < distance:
+				air_speed = max_air_speed
+				rotation_degrees = 0
+			elif intercept_target.distance > distance:
+				air_speed = -max_air_speed
+				rotation_degrees = 180
 		else:
+			distance = intercept_target.distance
 			air_speed = intercept_target.air_speed
+			rotation_degrees = intercept_target.rotation_degrees
+			SignalBus.plane_intercepted.emit(intercept_target)
+			print("ok")
 	else: 
 		air_speed = cruise_air_speed
 
