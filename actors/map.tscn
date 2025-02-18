@@ -88,6 +88,6 @@ position = Vector2(1537, 79)
 material = SubResource("CanvasItemMaterial_a5l16")
 position = Vector2(530, 81)
 
-[connection signal="area_entered" from="InterceptZone/Area2D" to="." method="_on_blue_area_2d_area_entered"]
-[connection signal="area_exited" from="InterceptZone/Area2D" to="." method="_on_blue_area_2d_area_exited"]
+[connection signal="area_entered" from="InterceptZone/Area2D" to="." method="_on_intercept_area_2d_area_entered"]
+[connection signal="area_exited" from="InterceptZone/Area2D" to="." method="_on_intercept_area_2d_area_exited"]
 [connection signal="area_entered" from="NoReturnZone/Area2D" to="." method="_on_noreturn_area_2d_area_entered"]

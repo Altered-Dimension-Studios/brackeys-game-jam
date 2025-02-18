@@ -6,6 +6,7 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_2rihk"]
 font_size = 21
+font_color = Color(4.47616e-06, 0.598317, 0.511324, 1)
 
 [node name="DashboardManager" type="Node2D"]
 script = ExtResource("1_y8ywx")
@@ -69,7 +70,7 @@ offset_left = 1350.0
 offset_top = 272.0
 offset_right = 1607.0
 offset_bottom = 539.0
-color = Color(0, 0, 0, 1)
+color = Color(0.0333413, 0.0767862, 0.0802572, 1)
 
 [node name="SpeedLabel" type="Label" parent="FlightDetailsPanel"]
 offset_left = 1366.0

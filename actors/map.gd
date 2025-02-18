@@ -1,14 +1,14 @@
 extends Node2D
 
 
-func _on_blue_area_2d_area_entered(area: Area2D) -> void:
+func _on_intercept_area_2d_area_entered(area: Area2D) -> void:
 	var plane: Airplane = area.get_parent()
 	plane.set_in_interception_area(true)
 	SignalBus.plane_entered_interception.emit(plane)
 	#print("Plane entered interception")
 
 
-func _on_blue_area_2d_area_exited(area: Area2D) -> void:
+func _on_intercept_area_2d_area_exited(area: Area2D) -> void:
 	var plane: Airplane = area.get_parent()
 	plane.set_in_interception_area(false)
 	
