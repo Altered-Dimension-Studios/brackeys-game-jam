@@ -33,13 +33,18 @@ func _on_cooldown_timer_timeout() -> void:
 
 func _on_button_fire_pressed() -> void:
 	if AirplaneManagerInstance._destroy_intercepted_plane():
+		$ButtonIntercept.disabled = true
 		$ButtonFire.disabled = true
+		$ButtonDivert.disabled = true
+		$ButtonAllow.disabled = true
 
 func _plane_removed(plane: Airplane) -> void:
 	if AirplaneManagerInstance.selected_plane == plane || \
 	AirplaneManagerInstance.num_airplanes == 0:
 		$ButtonIntercept.disabled = true
 		$ButtonFire.disabled = true
+		$ButtonDivert.disabled = true
+		$ButtonAllow.disabled = true
 		
 func _plane_selected(plane: Airplane) -> void:
 	if plane is not Interceptor && \
@@ -47,6 +52,11 @@ func _plane_selected(plane: Airplane) -> void:
 	plane.in_interception_area:
 		AirplaneManagerInstance.can_intercept = true
 		$ButtonIntercept.disabled = false
+		
+	if plane is not Interceptor:
+		$ButtonAllow.disabled = false
+		$ButtonDivert.disabled = false
+
 
 func _plane_intercepted(plane: Airplane) -> void:
 	$ButtonFire.disabled = false
@@ -60,3 +70,8 @@ func _plane_entered_interception(plane: Airplane) -> void:
 func _plane_exited_interception(plane: Airplane) -> void:
 	if plane is Interceptor:
 		AirplaneManagerInstance.can_intercept = true
+
+func _on_button_allow_pressed() -> void:
+	if AirplaneManagerInstance.selected_plane is not Interceptor && \
+	AirplaneManagerInstance.allow_plane(AirplaneManagerInstance.selected_plane):
+		$ButtonAllow.disabled = true

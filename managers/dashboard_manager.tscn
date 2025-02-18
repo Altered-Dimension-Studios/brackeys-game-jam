@@ -25,6 +25,24 @@ offset_bottom = 986.0
 disabled = true
 text = "SHOOT"
 
+[node name="ButtonAllow" type="Button" parent="."]
+offset_left = 879.0
+offset_top = 916.0
+offset_right = 999.0
+offset_bottom = 986.0
+disabled = true
+text = "ALLOW"
+
+[node name="ButtonDivert" type="Button" parent="."]
+offset_left = 879.0
+offset_top = 823.0
+offset_right = 999.0
+offset_bottom = 893.0
+disabled = true
+text = "DIVERT
+"
+
 [connection signal="pressed" from="ButtonIntercept" to="." method="_on_button_intercept_pressed"]
 [connection signal="timeout" from="ButtonIntercept/CooldownTimer" to="." method="_on_cooldown_timer_timeout"]
 [connection signal="pressed" from="ButtonFire" to="." method="_on_button_fire_pressed"]
+[connection signal="pressed" from="ButtonAllow" to="." method="_on_button_allow_pressed"]

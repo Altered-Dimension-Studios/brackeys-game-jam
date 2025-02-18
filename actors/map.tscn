@@ -56,7 +56,6 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NoReturnZone/Area2D"]
 position = Vector2(-2.78259, 2)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_nbfal")
 
 [node name="Divider" type="ColorRect" parent="."]

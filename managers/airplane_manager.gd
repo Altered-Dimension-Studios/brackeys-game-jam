@@ -25,6 +25,8 @@ signal ready_instance
 func _init() -> void:
 	SignalBus.plane_removed.connect(_on_plane_removed.bind())
 	SignalBus.plane_clicked.connect(_plane_selected.bind())
+	SignalBus.plane_entered_interception.connect(_plane_entered_interception.bind())
+	SignalBus.plane_exited_interception.connect(_plane_exited_interception.bind())
 	
 func ready_constructor(_plane_start, _plane_end, _interceptor_start, _interceptor_end) -> void:
 	plane_start = _plane_start
@@ -107,3 +109,19 @@ func _destroy_intercepted_plane() -> bool:
 		interceptor.intercept_target = null
 		return true
 	return false
+	
+func allow_plane(plane: Airplane) -> bool:
+	if plane != null:
+		plane.air_speed = 20000
+		if interceptor != null && interceptor.intercept_target == plane:
+			interceptor.intercept_target = null
+		if selected_plane == plane:
+			selected_plane = null
+		return true
+	return false
+
+func _plane_entered_interception(plane: Airplane) -> void:
+	pass
+
+func _plane_exited_interception(plane: Airplane) -> void:
+	pass
