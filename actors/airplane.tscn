@@ -8,6 +8,16 @@ size = Vector2(47, 37)
 [node name="Airplane" type="Node2D"]
 script = ExtResource("1_6k1tm")
 
+[node name="PlaneArea2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 3
+input_pickable = false
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlaneArea2D"]
+position = Vector2(-6.5, 1.5)
+shape = SubResource("RectangleShape2D_w4odt")
+
 [node name="Polygon2D" type="Polygon2D" parent="."]
 position = Vector2(-48.2573, -29.118)
 scale = Vector2(5.75244, 4.50915)
@@ -21,14 +31,5 @@ offset_right = 15.0
 offset_bottom = 21.0
 flat = true
 
-[node name="PlaneArea2D" type="Area2D" parent="."]
-collision_layer = 4
-collision_mask = 3
-monitoring = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlaneArea2D"]
-position = Vector2(-6.5, 1.5)
-shape = SubResource("RectangleShape2D_w4odt")
-
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="area_entered" from="PlaneArea2D" to="." method="_on_plane_area_2d_area_entered"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

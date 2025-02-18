@@ -6,6 +6,7 @@ class_name Interceptor
 
 func _ready() -> void:
 	super()
+	air_speed = 1500
 	position_offset = Vector2(0, -20)
 
 
