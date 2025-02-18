@@ -22,15 +22,15 @@ var selected_plane: Airplane
 
 signal ready_instance
 
-func constructor(_plane_start, _plane_end, _interceptor_start, _interceptor_end) -> void:
+func _init() -> void:
+	SignalBus.plane_removed.connect(_on_plane_removed.bind())
+	SignalBus.plane_clicked.connect(_plane_selected.bind())
+	
+func ready_constructor(_plane_start, _plane_end, _interceptor_start, _interceptor_end) -> void:
 	plane_start = _plane_start
 	plane_end = _plane_end
 	interceptor_start = _interceptor_start
 	interceptor_end = _interceptor_end
-
-func _init() -> void:
-	SignalBus.plane_removed.connect(_on_plane_removed.bind())
-	SignalBus.plane_clicked.connect(_plane_selected.bind())
 	
 func _ready() -> void:
 	emit_signal("ready_instance")
@@ -43,8 +43,6 @@ func _test_spawn():
 	_spawn_airplane()
 
 
-
-	
 func _plane_selected(plane: Airplane) -> void:
 	selected_plane = plane
 	

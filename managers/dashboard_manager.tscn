@@ -4,3 +4,27 @@
 
 [node name="DashboardManager" type="Node2D"]
 script = ExtResource("1_y8ywx")
+
+[node name="ButtonIntercept" type="Button" parent="."]
+offset_left = 728.0
+offset_top = 823.0
+offset_right = 848.0
+offset_bottom = 893.0
+disabled = true
+text = "INTERCEPT"
+
+[node name="CooldownTimer" type="Timer" parent="ButtonIntercept"]
+wait_time = 5.0
+one_shot = true
+
+[node name="ButtonFire" type="Button" parent="."]
+offset_left = 728.0
+offset_top = 916.0
+offset_right = 848.0
+offset_bottom = 986.0
+disabled = true
+text = "SHOOT"
+
+[connection signal="pressed" from="ButtonIntercept" to="." method="_on_button_intercept_pressed"]
+[connection signal="timeout" from="ButtonIntercept/CooldownTimer" to="." method="_on_cooldown_timer_timeout"]
+[connection signal="pressed" from="ButtonFire" to="." method="_on_button_fire_pressed"]
