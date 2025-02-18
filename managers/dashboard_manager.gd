@@ -98,6 +98,7 @@ func _on_button_allow_pressed() -> void:
 	AirplaneManagerInstance.allow_plane(AirplaneManagerInstance.selected_plane):
 		$ButtonAllow.disabled = true
 
+# da crash daca dai click si nu ai selectat nici o destinatie la inceput
 func _on_button_divert_pressed() -> void:
 	AirplaneManagerInstance.selected_plane.order_divert(
 		selected_destination, 

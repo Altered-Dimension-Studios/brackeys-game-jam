@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 PlanesDatabase="*res://utils/planes_db.gd"
 SignalBus="*res://utils/signal_bus.gd"
+DestinationsDatabase="*res://utils/destinations_db.gd"
 
 [display]
 
