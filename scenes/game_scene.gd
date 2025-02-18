@@ -11,6 +11,7 @@ var AirplaneManagerInstance: AirplaneManager
 var DashboardManagerScene = preload("res://managers/dashboard_manager.tscn")
 var DashboardManagerInstance: DashboardManager
 
+#max value should be 360
 @export var test_destinations_list_heading = {
 	"LAX": 123,
 	"JFK": 50,

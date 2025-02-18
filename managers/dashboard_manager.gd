@@ -65,7 +65,8 @@ func _plane_removed(plane: Airplane) -> void:
 		$ButtonIntercept.disabled = true
 		$ButtonFire.disabled = true
 		$ButtonDivert.disabled = true
-		$ButtonAllow.disabled = true
+		$ButtonAllow.disabled = true	
+		$ItemList.deselect_all()
 		
 func _plane_selected(plane: Airplane) -> void:
 	if plane is not Interceptor && \
@@ -77,7 +78,7 @@ func _plane_selected(plane: Airplane) -> void:
 	if plane is not Interceptor:
 		$ButtonAllow.disabled = false
 		$ButtonDivert.disabled = false
-
+		
 func _plane_intercepted(plane: Airplane) -> void:
 	$ButtonFire.disabled = false
 
