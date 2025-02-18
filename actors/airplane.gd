@@ -3,6 +3,8 @@ extends Node2D
 class_name Airplane
 
 @export var air_speed = 800 #km/h
+@export var max_air_speed = 1000
+@export var min_air_speed = 300
 @export var max_distance = 100000 #km
 @export var distance = 0
 @export var position_offset = Vector2(0, 20)

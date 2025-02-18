@@ -9,6 +9,11 @@ var interceptor_actor = preload("res://actors/interceptor.tscn")
 var airplane: Airplane
 var interceptor: Interceptor
 
+var num_airplanes = 0
+var num_interceptors = 0
+
+var can_intercept = true
+
 const MAX_DISTANCE = 20000 #km
 
 var selected_plane: Airplane
@@ -16,37 +21,57 @@ var selected_plane: Airplane
 func _ready() -> void:
 	SignalBus.plane_removed.connect(_on_plane_removed.bind())
 	
+	_spawn_airplane()
+	await get_tree().create_timer(4).timeout
+	_spawn_airplane()
+
+
+func _plane_selected(plane: Airplane) -> void:
+	selected_plane = plane
+	
+func _on_plane_removed(plane: Airplane) -> void:
+	if selected_plane == plane:
+		selected_plane = null
+	
+	if plane is Interceptor:
+		num_interceptors -= 1
+	else:
+		num_airplanes -= 1
+
+
+func _spawn_airplane() -> void:
 	var plane_data = PlanesDatabase.get_random_plane()
 	airplane = airplane_actor.instantiate() as Airplane
 	airplane.constructor([plane_start, plane_end], MAX_DISTANCE)	
 	airplane.plane_clicked.connect(_plane_selected.bind(airplane))
 	add_child(airplane)
-
 	airplane.move_to_marker(plane_start)
+	num_airplanes += 1
 
+func _spawn_interceptor() -> void:
+	var interceptor_start_distance = remap(interceptor_start.position.x, plane_end.position.x, plane_start.position.x, 0, MAX_DISTANCE)
 
-func _plane_selected(plane: Airplane) -> void:
-	selected_plane = plane
-
-func _on_plane_removed(plane: Airplane) -> void:
-	if selected_plane == plane:
-		selected_plane = null
+	interceptor = interceptor_actor.instantiate() as Interceptor
+	interceptor.constructor(
+		[plane_start, plane_end], 
+		MAX_DISTANCE, 
+		interceptor_start_distance
+		)
+	interceptor.plane_clicked.connect(_plane_selected.bind(interceptor))
+	add_child(interceptor)
+	interceptor.move_to_marker(interceptor_start)
 
 func _on_button_intercept_pressed() -> void:
-	if selected_plane && \
-	selected_plane != Interceptor && \
+	if can_intercept && selected_plane && \
+	selected_plane is not Interceptor && \
 	selected_plane.in_interception_area:
-		var interceptor_start_distance = remap(interceptor_start.position.x, plane_end.position.x, plane_start.position.x, 0, MAX_DISTANCE)
-
-		interceptor = interceptor_actor.instantiate() as Interceptor
-		interceptor.constructor(
-			[plane_start, plane_end], 
-			MAX_DISTANCE, 
-			interceptor_start_distance
-			)
-		interceptor.plane_clicked.connect(_plane_selected.bind(interceptor))
-		add_child(interceptor)
-		interceptor.move_to_marker(interceptor_start)
+		if num_interceptors == 0:
+			_spawn_interceptor()
+			num_interceptors += 1
+		interceptor.intercept_target = selected_plane
+		can_intercept = false
+		$ButtonIntercept.disabled = true
+		$ButtonIntercept/CooldownTimer.start()
 
 
 func _process(delta: float) -> void:
@@ -64,3 +89,8 @@ func _process(delta: float) -> void:
 	else:
 		$Layout/FlightDetailsPanel/SpeedValue.text = "- - - - -"
 		
+
+
+func _on_cooldown_timer_timeout() -> void:
+	can_intercept = true
+	$ButtonIntercept.disabled = false
