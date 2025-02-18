@@ -11,6 +11,12 @@ var AirplaneManagerInstance: AirplaneManager
 var DashboardManagerScene = preload("res://managers/dashboard_manager.tscn")
 var DashboardManagerInstance: DashboardManager
 
+@export var test_destinations_list_heading = {
+	"LAX": 123,
+	"JFK": 50,
+	"SGA": 343
+}
+
 func _init() -> void:
 	AirplaneManagerInstance = AirplaneManagerScene.instantiate() as AirplaneManager
 	AirplaneManagerInstance.ready_instance.connect(_airplane_manager_ready.bind())
@@ -26,15 +32,11 @@ func _ready() -> void:
 		)
 	add_child(AirplaneManagerInstance)
 	
-	DashboardManagerInstance.ready_constructor(AirplaneManagerInstance)
+	DashboardManagerInstance.ready_constructor(AirplaneManagerInstance, test_destinations_list_heading)
 	add_child(DashboardManagerInstance)
 	
 func _airplane_manager_ready() -> void:
 	AirplaneManagerInstance._test_spawn()
 
 func _process(delta: float) -> void:
-	if AirplaneManagerInstance && AirplaneManagerInstance.selected_plane:
-		$Layout/FlightDetailsPanel/SpeedValue.text = str(
-			AirplaneManagerInstance.selected_plane.air_speed)
-	else:
-		$Layout/FlightDetailsPanel/SpeedValue.text = "- - - - -"
+	pass
