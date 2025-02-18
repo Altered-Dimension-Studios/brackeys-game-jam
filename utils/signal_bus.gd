@@ -3,4 +3,7 @@ extends Node
 
 signal plane_entered_interception
 signal plane_exited_interception
-signal plane_entered_dead_zone
+signal plane_entered_noreturn_zone
+signal plane_removed
+signal plane_clicked
+signal plane_intercepted

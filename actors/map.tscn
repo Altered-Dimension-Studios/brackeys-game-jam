@@ -42,20 +42,20 @@ monitorable = false
 position = Vector2(-0.432014, -0.581818)
 shape = SubResource("RectangleShape2D_nofpy")
 
-[node name="DeadZone" type="Sprite2D" parent="."]
+[node name="NoReturnZone" type="Sprite2D" parent="."]
 modulate = Color(1, 0, 0, 1)
 material = SubResource("CanvasItemMaterial_efpxn")
 position = Vector2(92, 78)
 scale = Vector2(0.859375, 0.75)
 texture = ExtResource("1_gw3s3")
 
-[node name="Area2D" type="Area2D" parent="DeadZone"]
+[node name="Area2D" type="Area2D" parent="NoReturnZone"]
 collision_layer = 2
 collision_mask = 4
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DeadZone/Area2D"]
-position = Vector2(-2.78258, 2)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NoReturnZone/Area2D"]
+position = Vector2(-2.78259, 2)
 shape = SubResource("RectangleShape2D_nbfal")
 
 [node name="Divider" type="ColorRect" parent="."]
@@ -88,6 +88,6 @@ position = Vector2(1537, 79)
 material = SubResource("CanvasItemMaterial_a5l16")
 position = Vector2(530, 81)
 
-[connection signal="area_entered" from="InterceptZone/Area2D" to="." method="_on_blue_area_2d_area_entered"]
-[connection signal="area_exited" from="InterceptZone/Area2D" to="." method="_on_blue_area_2d_area_exited"]
-[connection signal="area_entered" from="DeadZone/Area2D" to="." method="_on_dead_area_2d_area_entered"]
+[connection signal="area_entered" from="InterceptZone/Area2D" to="." method="_on_intercept_area_2d_area_entered"]
+[connection signal="area_exited" from="InterceptZone/Area2D" to="." method="_on_intercept_area_2d_area_exited"]
+[connection signal="area_entered" from="NoReturnZone/Area2D" to="." method="_on_noreturn_area_2d_area_entered"]
