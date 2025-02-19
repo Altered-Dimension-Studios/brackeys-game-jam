@@ -1,0 +1,69 @@
+[gd_scene load_steps=5 format=3 uid="uid://crlnx15n8n4j2"]
+
+[ext_resource type="Script" path="res://actors/ControlPanels/flight_log_panel.gd" id="1_angx3"]
+[ext_resource type="Shader" path="res://shaders/terminal_screen.gdshader" id="1_seyou"]
+[ext_resource type="Texture2D" uid="uid://crrvojsrm11m3" path="res://images/screen.jpg" id="2_hg8m4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hnxyq"]
+shader = ExtResource("1_seyou")
+shader_parameter/brightness = 3.0
+shader_parameter/alpha = 1.0
+
+[node name="FlightLogPanel" type="Node2D"]
+script = ExtResource("1_angx3")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 379.0
+offset_bottom = 563.0
+color = Color(0, 0.140173, 0.0670055, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 36.0
+offset_top = 53.0
+offset_right = 323.0
+offset_bottom = 454.0
+theme_override_colors/default_color = Color(0, 0.72549, 0.32549, 1)
+theme_override_font_sizes/normal_font_size = 17
+text = "ATC: Flight status
+Flight 123: OK
+"
+
+[node name="Button" type="Button" parent="."]
+offset_top = 483.0
+offset_right = 376.0
+offset_bottom = 525.0
+text = "Flight status"
+
+[node name="Button2" type="Button" parent="."]
+offset_left = 1.0
+offset_top = 521.0
+offset_right = 377.0
+offset_bottom = 563.0
+text = "Emergency code verification"
+
+[node name="Description" type="Label" parent="."]
+offset_left = 36.0
+offset_top = 7.0
+offset_right = 186.0
+offset_bottom = 30.0
+theme_override_colors/font_color = Color(2.45467e-06, 0.830132, 0.347095, 1)
+text = "Flight 123, IAS - LAX"
+
+[node name="Divider" type="Label" parent="."]
+offset_left = 38.0
+offset_top = 28.0
+offset_right = 188.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(2.45467e-06, 0.830132, 0.347095, 1)
+text = "- - - - - - - - - - - - - -"
+
+[node name="ScreenFilter" type="TextureRect" parent="."]
+z_index = 1
+material = SubResource("ShaderMaterial_hnxyq")
+offset_top = 1.0
+offset_right = 379.0
+offset_bottom = 564.0
+mouse_filter = 2
+texture = ExtResource("2_hg8m4")
+expand_mode = 1
+metadata/_edit_lock_ = true

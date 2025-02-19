@@ -13,18 +13,25 @@ func ready_constructor(_AirplaneMnager: AirplaneManager, _destinations_list: Dic
 	
 func _init():
 	setup_signals()
+	
 
 func _ready():
 	$ItemList.clear()
 	for key in destinations_list.keys():
 		$ItemList.add_item(key)
+	
+	$FlightDetailsPanel/ScreenUpdateTimer.connect("timeout", _on_screen_update_timer_timeout.bind())
+
 
 func _process(delta: float) -> void:
+	pass
+
+func update_details_panel_values() -> void:
 	if AirplaneManagerInstance && AirplaneManagerInstance.selected_plane:
 		$FlightDetailsPanel/SpeedValue.text = str(
 			AirplaneManagerInstance.selected_plane.air_speed)
 		$FlightDetailsPanel/HeadingValue.text = str(
-			AirplaneManagerInstance.selected_plane.heading)
+			int(AirplaneManagerInstance.selected_plane.heading))
 		$FlightDetailsPanel/DestinationValue.text = AirplaneManagerInstance.selected_plane.destination
 	else:
 		$FlightDetailsPanel/SpeedValue.text = "- - - - -"
@@ -58,6 +65,7 @@ func _on_button_fire_pressed() -> void:
 		$ButtonFire.disabled = true
 		$ButtonDivert.disabled = true
 		$ButtonAllow.disabled = true
+		$FlightLogPanel.clear_log_panel()
 
 func _plane_removed(plane: Airplane) -> void:
 	if AirplaneManagerInstance.selected_plane == plane || \
@@ -67,7 +75,8 @@ func _plane_removed(plane: Airplane) -> void:
 		$ButtonDivert.disabled = true
 		$ButtonAllow.disabled = true	
 		$ItemList.deselect_all()
-		
+		$FlightLogPanel.clear_log_panel()
+
 func _plane_selected(plane: Airplane) -> void:
 	if plane is not Interceptor && \
 	$ButtonIntercept/CooldownTimer.time_left == 0 && \
@@ -77,7 +86,9 @@ func _plane_selected(plane: Airplane) -> void:
 		
 	if plane is not Interceptor:
 		$ButtonAllow.disabled = false
-		$ButtonDivert.disabled = false
+		$ButtonDivert.disabled = not $ItemList.is_anything_selected()
+	
+	update_details_panel_values()
 		
 func _plane_intercepted(plane: Airplane) -> void:
 	$ButtonFire.disabled = false
@@ -97,12 +108,23 @@ func _on_button_allow_pressed() -> void:
 	if AirplaneManagerInstance.selected_plane is not Interceptor && \
 	AirplaneManagerInstance.allow_plane(AirplaneManagerInstance.selected_plane):
 		$ButtonAllow.disabled = true
+	
+	$FlightLogPanel.clear_log_panel()
 
 func _on_button_divert_pressed() -> void:
-	AirplaneManagerInstance.selected_plane.order_divert(
-		selected_destination, 
-		destinations_list[selected_destination])
-	$ItemList.deselect_all()
+	if $ItemList.is_anything_selected():
+		AirplaneManagerInstance.selected_plane.order_divert(
+			selected_destination, 
+			destinations_list[selected_destination])
+		$ItemList.deselect_all()
+		$ButtonDivert.disabled = true
+	
+	$FlightLogPanel.update_log_panel_plane_data(AirplaneManagerInstance.selected_plane)
 
 func _on_item_list_item_selected(index: int) -> void:
 	selected_destination = $ItemList.get_item_text(index)
+	$ButtonDivert.disabled = false
+
+
+func _on_screen_update_timer_timeout() -> void:
+	update_details_panel_values()

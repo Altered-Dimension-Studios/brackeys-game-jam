@@ -1,19 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://g1vd28ypt6c2"]
+[gd_scene load_steps=4 format=3 uid="uid://g1vd28ypt6c2"]
 
 [ext_resource type="Script" path="res://managers/dashboard_manager.gd" id="1_y8ywx"]
-[ext_resource type="Texture2D" uid="uid://crrvojsrm11m3" path="res://images/screen.jpg" id="2_gqeck"]
-[ext_resource type="Shader" path="res://shaders/terminal_screen.gdshader" id="2_v48sf"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qvgl3"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_2rihk"]
-font_size = 21
-font_color = Color(4.47616e-06, 0.598317, 0.511324, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bw36o"]
-shader = ExtResource("2_v48sf")
-shader_parameter/brightness = 2.167
-shader_parameter/alpha = 1.0
+[ext_resource type="PackedScene" uid="uid://de0nty1vy6w0a" path="res://actors/ControlPanels/FlightDetailsPanel.tscn" id="2_x66yu"]
+[ext_resource type="PackedScene" uid="uid://crlnx15n8n4j2" path="res://actors/ControlPanels/FlightLogPanel.tscn" id="4_mkxi3"]
 
 [node name="DashboardManager" type="Node2D"]
 script = ExtResource("1_y8ywx")
@@ -69,84 +58,11 @@ offset_bottom = 811.0
 text = "Divert list
 "
 
-[node name="FlightDetailsPanel" type="Node" parent="."]
+[node name="FlightLogPanel" parent="." instance=ExtResource("4_mkxi3")]
+position = Vector2(138, 244)
 
-[node name="Border" type="ColorRect" parent="FlightDetailsPanel"]
-material = SubResource("CanvasItemMaterial_qvgl3")
-offset_left = 1339.0
-offset_top = 261.0
-offset_right = 1618.0
-offset_bottom = 551.0
-color = Color(0.0941176, 0.109804, 0.137255, 1)
-
-[node name="Background" type="ColorRect" parent="FlightDetailsPanel"]
-offset_left = 1350.0
-offset_top = 272.0
-offset_right = 1607.0
-offset_bottom = 539.0
-color = Color(0.0333413, 0.0767862, 0.0802572, 1)
-
-[node name="SpeedLabel" type="Label" parent="FlightDetailsPanel"]
-offset_left = 1366.0
-offset_top = 292.0
-offset_right = 1415.0
-offset_bottom = 315.0
-text = "SPEED
-"
-label_settings = SubResource("LabelSettings_2rihk")
-
-[node name="SpeedValue" type="Label" parent="FlightDetailsPanel"]
-offset_left = 1527.0
-offset_top = 292.0
-offset_right = 1590.0
-offset_bottom = 322.0
-text = "00000
-"
-label_settings = SubResource("LabelSettings_2rihk")
-
-[node name="HeadingLabel" type="Label" parent="FlightDetailsPanel"]
-offset_left = 1365.0
-offset_top = 338.0
-offset_right = 1460.0
-offset_bottom = 368.0
-text = "HEADING
-"
-label_settings = SubResource("LabelSettings_2rihk")
-
-[node name="HeadingValue" type="Label" parent="FlightDetailsPanel"]
-offset_left = 1527.0
-offset_top = 338.0
-offset_right = 1590.0
-offset_bottom = 368.0
-text = "00000
-"
-label_settings = SubResource("LabelSettings_2rihk")
-
-[node name="DestinationLabel" type="Label" parent="FlightDetailsPanel"]
-offset_left = 1365.0
-offset_top = 451.0
-offset_right = 1460.0
-offset_bottom = 481.0
-text = "DESTINATION
-"
-label_settings = SubResource("LabelSettings_2rihk")
-
-[node name="DestinationValue" type="Label" parent="FlightDetailsPanel"]
-offset_left = 1527.0
-offset_top = 451.0
-offset_right = 1590.0
-offset_bottom = 481.0
-text = "- - - - -"
-label_settings = SubResource("LabelSettings_2rihk")
-
-[node name="TextureRect" type="TextureRect" parent="FlightDetailsPanel"]
-material = SubResource("ShaderMaterial_bw36o")
-offset_left = 1349.0
-offset_top = 270.0
-offset_right = 1608.0
-offset_bottom = 542.0
-texture = ExtResource("2_gqeck")
-expand_mode = 1
+[node name="FlightDetailsPanel" parent="." instance=ExtResource("2_x66yu")]
+position = Vector2(1317, 283)
 
 [connection signal="pressed" from="ButtonIntercept" to="." method="_on_button_intercept_pressed"]
 [connection signal="timeout" from="ButtonIntercept/CooldownTimer" to="." method="_on_cooldown_timer_timeout"]
