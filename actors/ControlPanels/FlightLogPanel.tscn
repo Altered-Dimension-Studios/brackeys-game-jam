@@ -17,24 +17,24 @@ offset_right = 379.0
 offset_bottom = 563.0
 color = Color(0, 0.140173, 0.0670055, 1)
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = 36.0
-offset_top = 53.0
-offset_right = 323.0
-offset_bottom = 454.0
+[node name="LogText" type="RichTextLabel" parent="."]
+offset_left = 32.0
+offset_top = 66.0
+offset_right = 319.0
+offset_bottom = 467.0
 theme_override_colors/default_color = Color(0, 0.72549, 0.32549, 1)
 theme_override_font_sizes/normal_font_size = 17
-text = "ATC: Flight status
-Flight 123: OK
+bbcode_enabled = true
+text = "
 "
 
-[node name="Button" type="Button" parent="."]
+[node name="FlightStatusButton" type="Button" parent="."]
 offset_top = 483.0
 offset_right = 376.0
 offset_bottom = 525.0
 text = "Flight status"
 
-[node name="Button2" type="Button" parent="."]
+[node name="CodeButton" type="Button" parent="."]
 offset_left = 1.0
 offset_top = 521.0
 offset_right = 377.0
@@ -42,18 +42,18 @@ offset_bottom = 563.0
 text = "Emergency code verification"
 
 [node name="Description" type="Label" parent="."]
-offset_left = 36.0
-offset_top = 7.0
-offset_right = 186.0
-offset_bottom = 30.0
+offset_left = 32.0
+offset_top = 20.0
+offset_right = 182.0
+offset_bottom = 43.0
 theme_override_colors/font_color = Color(2.45467e-06, 0.830132, 0.347095, 1)
 text = "Flight 123, IAS - LAX"
 
 [node name="Divider" type="Label" parent="."]
-offset_left = 38.0
-offset_top = 28.0
-offset_right = 188.0
-offset_bottom = 51.0
+offset_left = 34.0
+offset_top = 41.0
+offset_right = 184.0
+offset_bottom = 64.0
 theme_override_colors/font_color = Color(2.45467e-06, 0.830132, 0.347095, 1)
 text = "- - - - - - - - - - - - - -"
 
@@ -67,3 +67,6 @@ mouse_filter = 2
 texture = ExtResource("2_hg8m4")
 expand_mode = 1
 metadata/_edit_lock_ = true
+
+[connection signal="pressed" from="FlightStatusButton" to="." method="_on_flight_status_button_pressed"]
+[connection signal="pressed" from="CodeButton" to="." method="_on_code_button_pressed"]

@@ -73,3 +73,9 @@ func set_in_interception_area(interception: bool) -> void:
 func order_divert(new_destination: String, heading: int) -> void:
 	destination = new_destination
 	target_heading = heading
+	
+func get_flight_check_repsonse() -> String:
+	return "Status OK"
+	
+func get_code_check_repsonse() -> String:
+	return "69694242"
