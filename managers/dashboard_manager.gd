@@ -18,6 +18,13 @@ func _ready():
 	$ItemList.clear()
 	for key in destinations_list.keys():
 		$ItemList.add_item(key)
+	# Mark random destination as selected to avoid crash 
+	set_random_destination()
+
+func set_random_destination() -> void:
+	var size = destinations_list.size()
+	var random_key = destinations_list.keys()[randi() % size]
+	selected_destination = random_key
 
 func _process(delta: float) -> void:
 	if AirplaneManagerInstance && AirplaneManagerInstance.selected_plane:
@@ -98,7 +105,6 @@ func _on_button_allow_pressed() -> void:
 	AirplaneManagerInstance.allow_plane(AirplaneManagerInstance.selected_plane):
 		$ButtonAllow.disabled = true
 
-# da crash daca dai click si nu ai selectat nici o destinatie la inceput
 func _on_button_divert_pressed() -> void:
 	AirplaneManagerInstance.selected_plane.order_divert(
 		selected_destination, 

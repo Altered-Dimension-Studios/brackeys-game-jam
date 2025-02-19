@@ -16,9 +16,10 @@ anchors_preset = 0
 script = ExtResource("1_qrdpf")
 
 [node name="Cover" type="TextureButton" parent="."]
+visible = false
 layout_mode = 0
-offset_right = 127.0
-offset_bottom = 176.0
+offset_right = 200.0
+offset_bottom = 300.0
 texture_normal = SubResource("GradientTexture2D_ermyr")
 
 [node name="Label" type="Label" parent="Cover"]
@@ -62,5 +63,18 @@ offset_top = 22.0
 grow_horizontal = 2
 grow_vertical = 2
 vertical = true
+
+[node name="Pages" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 400.0
+offset_bottom = 300.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Pages"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="button_up" from="Cover" to="." method="_on_cover_button_up"]

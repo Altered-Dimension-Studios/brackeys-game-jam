@@ -2,10 +2,8 @@ extends Node
 class_name DivertRule
 
 var destination_name: String
+var rules: Dictionary
 # Basically plane name
-var allowed_airframe: String
-var min_weight: int
-var max_weight: int
 const WEIGHT_OFFSET: int = 10_000
 const MIN_WEIGHT: int = 20_000
 const MAX_WEIGHT: int = 35_000
@@ -15,10 +13,10 @@ func generate_rules() -> void:
 	generate_allowed_airframe()
 
 func generate_weight_range(min_value: int, max_value: int) -> void:
-	min_weight = randi_range(min_value, max_value)
-	max_weight = min_weight + WEIGHT_OFFSET
+	rules["min_weight"] = randi_range(min_value, max_value)
+	rules["max_weight"] = rules["min_weight"] + WEIGHT_OFFSET
 	
 
 func generate_allowed_airframe() -> void:
 	var planes = PlanesDatabase.plane_names
-	allowed_airframe = planes[randi() % planes.size()]
+	rules["allowed_airframe"] = planes[randi() % planes.size()]
