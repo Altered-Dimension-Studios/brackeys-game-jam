@@ -18,6 +18,13 @@ func _ready():
 	$ItemList.clear()
 	for key in destinations_list.keys():
 		$ItemList.add_item(key)
+	# Mark random destination as selected to avoid crash 
+	set_random_destination()
+
+func set_random_destination() -> void:
+	var size = destinations_list.size()
+	var random_key = destinations_list.keys()[randi() % size]
+	selected_destination = random_key
 
 func _process(delta: float) -> void:
 	if AirplaneManagerInstance && AirplaneManagerInstance.selected_plane:
